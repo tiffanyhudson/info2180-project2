@@ -1,5 +1,5 @@
 "use strict"; 
-var gamePiece; 
+var piece; 
 var notify;
 var timer;
 var spaceY;
@@ -11,56 +11,33 @@ var spaceX;
 {
 
 	var puzzleArea = document.getElementById('puzzlearea');
-	gamePiece = puzzleArea.getElementsByTagName('div'); 
+	piece = puzzleArea.getElementsByTagName('div'); 
 
-	for (var i=0; i<gamePiece.length; i++) 
+	for (var i=0; i<piece.length; i++) 
 	{
 
-		gamePiece[i].className = 'puzzlepiece'; 
-
-		gamePiece[i].style.left = (i%4*100)+'px'; 
-
-		gamePiece[i].style.top = (parseInt(i/4)*100) + 'px'; 
-
-		gamePiece[i].style.backgroundPosition= '-' + gamePiece[i].style.left + ' ' + '-' + gamePiece[i].style.top; 
+		piece[i].className = 'puzzlepiece'; 
+		piece[i].style.left = (i%4*100)+'px'; 
+		piece[i].style.top = (parseInt(i/4)*100) + 'px'; 
+		piece[i].style.backgroundPosition= '-' + piece[i].style.left + ' ' + '-' + piece[i].style.top; 
 		
 
-		gamePiece[i].onmouseover = function() 
+		piece[i].onmouseover = function() 
 
 		{
 			if (checkMove(parseInt(this.innerHTML)))
 
 			{
-
 				this.style.border = "2px solid red";
-
 				this.style.color = "#006600";
-
 				this.style.textDecoration = "underline";
-
                 this.style.backgroundImage="url('http://www.georginalandick.com/wp-content/uploads/2016/09/Coastal-Trail-Artwork-400x400px.jpg')"; 
-                
-
-			}
+            }
 
 		};
 
 
-		gamePiece[i].onmouseout = function() 
-
-		{
-
-			this.style.border = "2px solid black"; 
-
-			this.style.color = "#000000";
-
-			this.style.textDecoration = "none"; 
-
-		};
-
-
-
-		gamePiece[i].onclick = function() 
+		piece[i].onclick = function() 
 		{
 
 			if (checkMove(parseInt(this.innerHTML))) 
@@ -83,7 +60,17 @@ var spaceX;
 
 		};
 
+
+		piece[i].onmouseout = function() 
+
+		{
+			this.style.border = "2px solid black"; 
+			this.style.color = "#000000";
+			this.style.textDecoration = "none"; 
+		};
+
 	}
+
 
 
 	var shuffle = document.getElementById('shufflebutton'); 
@@ -284,12 +271,12 @@ function finish()
 
 	var flag = true;
 
-	for (var i = 0; i < gamePiece.length; i++)  
+	for (var i = 0; i < piece.length; i++)  
 	{
 
-		var top = parseInt(gamePiece[i].style.top);
+		var top = parseInt(piece[i].style.top);
 
-		var left = parseInt(gamePiece[i].style.left);
+		var left = parseInt(piece[i].style.left);
 
 
 		if (left != (i%4*100) || top != parseInt(i/4)*100) 
@@ -324,11 +311,11 @@ function left(x, y)
 
 	{
 
-		for (var i = 0; i < gamePiece.length; i++) 
+		for (var i = 0; i < piece.length; i++) 
 
 		{
 
-			if (parseInt(gamePiece[i].style.left) + 100 == cordX && parseInt(gamePiece[i].style.top) == cordY)
+			if (parseInt(piece[i].style.left) + 100 == cordX && parseInt(piece[i].style.top) == cordY)
 
 			{
 
@@ -363,9 +350,9 @@ function right (x, y)
 
 	{
 
-		for (var i =0; i<gamePiece.length; i++){
+		for (var i =0; i<piece.length; i++){
 
-			if (parseInt(gamePiece[i].style.left) - 100 == cordX && parseInt(gamePiece[i].style.top) == cordY) 
+			if (parseInt(piece[i].style.left) - 100 == cordX && parseInt(piece[i].style.top) == cordY) 
 
 			{
 
@@ -400,11 +387,11 @@ function up(x, y)
 
 	{
 
-		for (var i=0; i<gamePiece.length; i++)
+		for (var i=0; i<piece.length; i++)
 
 		{
 
-			if (parseInt(gamePiece[i].style.top) + 100 == cordY && parseInt(gamePiece[i].style.left) == cordX) 
+			if (parseInt(piece[i].style.top) + 100 == cordY && parseInt(piece[i].style.left) == cordX) 
 
 			{
 
@@ -440,11 +427,11 @@ function down (x, y)
 
 	{
 
-		for (var i=0; i<gamePiece.length; i++)
+		for (var i=0; i<piece.length; i++)
 
 		{
 
-			if (parseInt(gamePiece[i].style.top) - 100 == cordY && parseInt(gamePiece[i].style.left) == cordX) 
+			if (parseInt(piece[i].style.top) - 100 == cordY && parseInt(piece[i].style.left) == cordX) 
 
 			{
 
@@ -471,15 +458,15 @@ function down (x, y)
 function swap (position) 
 {
 
-	var temp = gamePiece[position].style.top;
+	var temp = piece[position].style.top;
 
-	gamePiece[position].style.top = spaceY;
+	piece[position].style.top = spaceY;
 
 	spaceY = temp;
 
-	temp = gamePiece[position].style.left;
+	temp = piece[position].style.left;
 
-	gamePiece[position].style.left = spaceX;
+	piece[position].style.left = spaceX;
 
 	spaceX = temp;
 
